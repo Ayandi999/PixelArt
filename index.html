@@ -43,6 +43,17 @@
                }
           });
 
+          socket.on('initial-state', (state) => {
+               // state looks like: { "color-4": "#ff0000", "color-20": "#00ff00" }
+               // We loop through the object and update the board!
+               for (const id in state) {
+                    const ele = document.getElementById(id);
+                    if (ele) {
+                         ele.value = state[id];
+                    }
+               }
+          });
+
           socket.on("change-is-here", (data) => {
                const ele = document.getElementById(data.id);
                ele.value = data.color;
