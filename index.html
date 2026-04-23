@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+     <h1>PixelArt</h1>
+     <div id="board"></div>
+     <script src="/socket.io/socket.io.js"></script>
+     <script>
+          let board = document.getElementById('board');
+          const socket = io(); // This line ALONE automatically connects you to the backend!
+
+          for (let i = 0; i < 2500; i++) {
+               // 1. Create a NEW input element inside the loop
+               let inp = document.createElement('input');
+
+               // 2. Set the attributes
+               inp.type = 'color';       // Makes it a color picker
+               inp.value = '#FFFFFF';    // Sets initial color to white
+               inp.id = `color-${i}`;    // Gives it a unique ID (e.g., color-0, color-1)
+
+               // 3. Append it to the board
+               board.appendChild(inp);
+          }
+          // Add ONE event listener to the parent "board" (Event Delegation)
+          board.addEventListener('input', (e) => {
+               // Double check that the thing triggering the event is actually an input
+               if (e.target.tagName === 'INPUT') {
+                    // e.target is the specific box you clicked!
+                    const changedId = e.target.id;
+                    const newColor = e.target.value;
+
+                    console.log(`Box ${changedId} was changed to color: ${newColor}`);
+
+                    // Now you can send this info to the server!
+                    socket.emit('color-update', { id: changedId, color: newColor });
+               }
+          });
+
+          socket.on("change-is-here", (data) => {
+               const ele = document.getElementById(data.id);
+               ele.value = data.color;
+          })
+     </script>
+</body>
+
+</html>

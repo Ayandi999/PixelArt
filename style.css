@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@700&display=swap');
+
+body {
+     margin: 0;
+     padding: 0;
+     background-color: #0f172a; /* Nice dark modern background */
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     min-height: 100vh;
+     font-family: 'Outfit', sans-serif;
+     overflow-x: hidden;
+}
+
+h1 {
+     font-size: 4rem;
+     margin: 20px 0;
+     background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+     -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+     text-transform: uppercase;
+     letter-spacing: 4px;
+     text-shadow: 0 10px 20px rgba(0, 242, 254, 0.2);
+}
+
+#board {
+     display: grid;
+     /* 50 columns, each 15px wide */
+     grid-template-columns: repeat(50, 15px);
+     /* 50 rows, each 15px tall */
+     grid-template-rows: repeat(50, 15px);
+     gap: 0;
+     background-color: #1e293b;
+     padding: 10px;
+     border-radius: 12px;
+     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+}
+
+/* Removes default borders and resets appearance */
+input[type="color"] {
+     -webkit-appearance: none;
+     -moz-appearance: none;
+     appearance: none;
+     border: 1px solid rgba(255, 255, 255, 0.05); /* Faint grid lines */
+     box-sizing: border-box;
+     width: 15px; 
+     height: 15px; 
+     padding: 0;
+     margin: 0;
+     cursor: pointer;
+     transition: transform 0.1s ease, box-shadow 0.1s ease, z-index 0.1s;
+     position: relative;
+}
+
+/* Premium Interactive Hover Effect */
+input[type="color"]:hover {
+     transform: scale(1.6);
+     z-index: 10;
+     box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+     border: 1px solid rgba(255, 255, 255, 0.8);
+     border-radius: 2px;
+}
+
+/* Chrome/Safari specific fixes for color inputs */
+input[type="color"]::-webkit-color-swatch-wrapper {
+     padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+     border: none;
+}
+
+/* Firefox specific fixes for color inputs */
+input[type="color"]::-moz-color-swatch {
+     border: none;
+}
