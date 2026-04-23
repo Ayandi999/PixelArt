@@ -15,6 +15,10 @@ app.get('/style.css', (req, res) => {
      res.sendFile(join(import.meta.dirname, 'style.css'));
 })
 
+app.get('/favicon.png', (req, res) => {
+     res.sendFile(join(import.meta.dirname, 'favicon.png'));
+})
+
 // This object stays in the server's memory 24/7!
 const boardState = {};
 
