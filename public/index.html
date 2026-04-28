@@ -15,7 +15,7 @@
      <script src="/socket.io/socket.io.js"></script>
      <script>
           let board = document.getElementById('board');
-          const socket = io(); // This line ALONE automatically connects you to the backend!
+          const socket = io();
 
           for (let i = 0; i < 2500; i++) {
                // 1. Create a NEW input element inside the loop
@@ -29,8 +29,8 @@
                // 3. Append it to the board
                board.appendChild(inp);
           }
-          // Add ONE event listener to the parent "board" (Event Delegation)
-          board.addEventListener('input', (e) => {
+          //This event listener fires only when change is done to make the live color picking feature use 'input'
+          board.addEventListener('change', (e) => {
                // Double check that the thing triggering the event is actually an input
                if (e.target.tagName === 'INPUT') {
                     // e.target is the specific box you clicked!
@@ -44,9 +44,9 @@
                }
           });
 
+          //This right here is to set the color as we want
           socket.on('initial-state', (state) => {
-               // state looks like: { "color-4": "#ff0000", "color-20": "#00ff00" }
-               // We loop through the object and update the board!
+               //state is the {id:color} => 1:#FFFFF [like this]
                for (const id in state) {
                     const ele = document.getElementById(id);
                     if (ele) {
